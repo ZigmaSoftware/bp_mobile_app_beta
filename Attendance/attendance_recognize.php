@@ -84,7 +84,7 @@ function bp_att_recognize_jpeg_upload(string $field): ?CURLFile
     $height = imagesy($source);
     $canvas = imagecreatetruecolor($width, $height);
     if (!$canvas) {
-        @imagedestroy($source);
+        imagedestroy($source);
         bp_att_recognize_json([
             'status' => false,
             'message' => 'Failed to prepare attendance image',
@@ -98,8 +98,8 @@ function bp_att_recognize_jpeg_upload(string $field): ?CURLFile
 
     $outputPath = tempnam(sys_get_temp_dir(), 'bp_att_');
     if ($outputPath === false) {
-        @imagedestroy($source);
-        @imagedestroy($canvas);
+        imagedestroy($source);
+        imagedestroy($canvas);
         bp_att_recognize_json([
             'status' => false,
             'message' => 'Failed to allocate attendance image',
@@ -110,8 +110,8 @@ function bp_att_recognize_jpeg_upload(string $field): ?CURLFile
     @rename($outputPath, $jpegPath);
 
     if (!imagejpeg($canvas, $jpegPath, 85)) {
-        @imagedestroy($source);
-        @imagedestroy($canvas);
+        imagedestroy($source);
+        imagedestroy($canvas);
         @unlink($jpegPath);
         bp_att_recognize_json([
             'status' => false,
@@ -120,8 +120,8 @@ function bp_att_recognize_jpeg_upload(string $field): ?CURLFile
         ], 500);
     }
 
-    @imagedestroy($source);
-    @imagedestroy($canvas);
+    imagedestroy($source);
+    imagedestroy($canvas);
 
     $GLOBALS['bp_att_recognize_temp_files'][] = $jpegPath;
     $rawName = trim((string)($_FILES[$field]['name'] ?? $field));
@@ -177,7 +177,7 @@ foreach (bp_att_recognize_target_urls() as $targetUrl) {
     $error = curl_error($curl);
     $httpCode = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
     $contentType = (string)curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
-    @curl_close($curl);
+    curl_close($curl);
 
     if ($raw === false) {
         $lastResponse = [
