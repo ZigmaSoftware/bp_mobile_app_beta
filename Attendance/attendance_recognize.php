@@ -12,7 +12,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'OPTIONS') {
     exit;
 }
 
-function bp_att_recognize_json(array $payload, int $statusCode = 200): never
+function bp_att_recognize_json(array $payload, int $statusCode = 200)
 {
     http_response_code($statusCode);
     $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
@@ -23,6 +23,122 @@ function bp_att_recognize_json(array $payload, int $statusCode = 200): never
     exit;
 }
 
+function bp_att_recognize_target_urls(): array
+{
+    $urls = [];
+    foreach ([
+        defined('BP_FACE_RECOGNITION_BASE_URL') ? BP_FACE_RECOGNITION_BASE_URL : '',
+        'http://125.17.238.158:5001',
+        'http://zigfly.in:5001',
+    ] as $baseUrl) {
+        $baseUrl = rtrim(trim((string)$baseUrl), '/');
+        if ($baseUrl !== '') {
+            $urls[$baseUrl . '/recognize_bp'] = true;
+        }
+    }
+
+    return array_keys($urls);
+}
+
+function bp_att_recognize_jpeg_upload(string $field): ?CURLFile
+{
+    if (!isset($_FILES[$field]['tmp_name']) || !is_uploaded_file((string)$_FILES[$field]['tmp_name'])) {
+        return null;
+    }
+
+    $errorCode = (int)($_FILES[$field]['error'] ?? UPLOAD_ERR_OK);
+    if ($errorCode !== UPLOAD_ERR_OK) {
+        bp_att_recognize_json([
+            'status' => false,
+            'message' => 'Attendance image upload failed',
+            'field' => $field,
+            'error_code' => $errorCode,
+        ], 400);
+    }
+
+    $tmpName = (string)$_FILES[$field]['tmp_name'];
+    $sourceBytes = @file_get_contents($tmpName);
+    if ($sourceBytes === false || $sourceBytes === '') {
+        bp_att_recognize_json([
+            'status' => false,
+            'message' => 'Attendance image is empty',
+            'field' => $field,
+        ], 400);
+    }
+
+    if (!function_exists('imagecreatefromstring') || !function_exists('imagejpeg')) {
+        $fileName = trim((string)($_FILES[$field]['name'] ?? basename($tmpName)));
+        return new CURLFile($tmpName, 'image/jpeg', $fileName !== '' ? $fileName : ($field . '.jpg'));
+    }
+
+    $source = @imagecreatefromstring($sourceBytes);
+    if (!$source) {
+        bp_att_recognize_json([
+            'status' => false,
+            'message' => 'Unsupported attendance image format',
+            'field' => $field,
+        ], 400);
+    }
+
+    $width = imagesx($source);
+    $height = imagesy($source);
+    $canvas = imagecreatetruecolor($width, $height);
+    if (!$canvas) {
+        @imagedestroy($source);
+        bp_att_recognize_json([
+            'status' => false,
+            'message' => 'Failed to prepare attendance image',
+            'field' => $field,
+        ], 500);
+    }
+
+    $white = imagecolorallocate($canvas, 255, 255, 255);
+    imagefilledrectangle($canvas, 0, 0, $width, $height, $white);
+    imagecopy($canvas, $source, 0, 0, 0, 0, $width, $height);
+
+    $outputPath = tempnam(sys_get_temp_dir(), 'bp_att_');
+    if ($outputPath === false) {
+        @imagedestroy($source);
+        @imagedestroy($canvas);
+        bp_att_recognize_json([
+            'status' => false,
+            'message' => 'Failed to allocate attendance image',
+            'field' => $field,
+        ], 500);
+    }
+    $jpegPath = $outputPath . '.jpg';
+    @rename($outputPath, $jpegPath);
+
+    if (!imagejpeg($canvas, $jpegPath, 85)) {
+        @imagedestroy($source);
+        @imagedestroy($canvas);
+        @unlink($jpegPath);
+        bp_att_recognize_json([
+            'status' => false,
+            'message' => 'Failed to convert attendance image to JPEG',
+            'field' => $field,
+        ], 500);
+    }
+
+    @imagedestroy($source);
+    @imagedestroy($canvas);
+
+    $GLOBALS['bp_att_recognize_temp_files'][] = $jpegPath;
+    $rawName = trim((string)($_FILES[$field]['name'] ?? $field));
+    $safeName = preg_replace('/\.[A-Za-z0-9]{2,6}$/', '', basename($rawName)) ?: $field;
+
+    return new CURLFile($jpegPath, 'image/jpeg', $safeName . '.jpg');
+}
+
+$GLOBALS['bp_att_recognize_temp_files'] = [];
+register_shutdown_function(static function (): void {
+    foreach ((array)($GLOBALS['bp_att_recognize_temp_files'] ?? []) as $path) {
+        if (is_string($path) && $path !== '') {
+            @unlink($path);
+        }
+    }
+});
+
 if (!function_exists('curl_init')) {
     bp_att_recognize_json([
         'status' => false,
@@ -30,7 +146,6 @@ if (!function_exists('curl_init')) {
     ], 500);
 }
 
-$targetUrl = rtrim((string)BP_FACE_RECOGNITION_BASE_URL, '/') . '/recognize_bp';
 $postFields = [];
 
 foreach ($_POST as $key => $value) {
@@ -38,49 +153,73 @@ foreach ($_POST as $key => $value) {
 }
 
 foreach (['targeted_image', 'captured_image'] as $field) {
-    if (!isset($_FILES[$field]['tmp_name']) || !is_uploaded_file((string)$_FILES[$field]['tmp_name'])) {
+    $upload = bp_att_recognize_jpeg_upload($field);
+    if ($upload !== null) {
+        $postFields[$field] = $upload;
+    }
+}
+
+$lastResponse = null;
+
+foreach (bp_att_recognize_target_urls() as $targetUrl) {
+    $curl = curl_init($targetUrl);
+    curl_setopt_array($curl, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => $postFields,
+        CURLOPT_CONNECTTIMEOUT => CONNECT_TIMEOUT_SECONDS,
+        CURLOPT_TIMEOUT => REQUEST_TIMEOUT_SECONDS + 20,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTPHEADER => ['Accept: application/json'],
+    ]);
+
+    $raw = curl_exec($curl);
+    $error = curl_error($curl);
+    $httpCode = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    $contentType = (string)curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
+    @curl_close($curl);
+
+    if ($raw === false) {
+        $lastResponse = [
+            'status' => false,
+            'message' => 'Face recognition service is unreachable',
+            'error' => $error,
+            'http_code' => 502,
+            'content_type' => 'application/json',
+            'raw' => '',
+        ];
         continue;
     }
 
-    $tmpName = (string)$_FILES[$field]['tmp_name'];
-    $fileName = trim((string)($_FILES[$field]['name'] ?? basename($tmpName)));
-    $mimeType = trim((string)($_FILES[$field]['type'] ?? 'application/octet-stream'));
-    $postFields[$field] = new CURLFile($tmpName, $mimeType, $fileName);
+    $lastResponse = [
+        'status' => $httpCode >= 200 && $httpCode < 300,
+        'message' => 'Face recognition response received',
+        'http_code' => $httpCode > 0 ? $httpCode : 200,
+        'content_type' => $contentType,
+        'raw' => (string)$raw,
+    ];
+
+    if ($httpCode < 500) {
+        break;
+    }
 }
 
-$curl = curl_init($targetUrl);
-curl_setopt_array($curl, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $postFields,
-    CURLOPT_CONNECTTIMEOUT => CONNECT_TIMEOUT_SECONDS,
-    CURLOPT_TIMEOUT => REQUEST_TIMEOUT_SECONDS + 20,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTPHEADER => ['Accept: application/json'],
-]);
-
-$raw = curl_exec($curl);
-$error = curl_error($curl);
-$httpCode = (int)curl_getinfo($curl, CURLINFO_HTTP_CODE);
-$contentType = (string)curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
-
-if ($raw === false) {
+if ($lastResponse === null) {
     bp_att_recognize_json([
         'status' => false,
-        'message' => 'Face recognition service is unreachable',
-        'error' => $error,
-    ], 502);
+        'message' => 'Face recognition service is not configured',
+    ], 500);
 }
 
-http_response_code($httpCode > 0 ? $httpCode : 200);
-if (stripos($contentType, 'application/json') !== false) {
+http_response_code((int)$lastResponse['http_code']);
+if (stripos((string)$lastResponse['content_type'], 'application/json') !== false) {
     header('Content-Type: application/json; charset=utf-8');
-    echo $raw;
+    echo (string)$lastResponse['raw'];
     exit;
 }
 
 bp_att_recognize_json([
-    'status' => $httpCode >= 200 && $httpCode < 300,
-    'message' => 'Face recognition response received',
-    'raw' => (string)$raw,
-], $httpCode > 0 ? $httpCode : 200);
+    'status' => (bool)$lastResponse['status'],
+    'message' => (string)$lastResponse['message'],
+    'raw' => (string)$lastResponse['raw'],
+], (int)$lastResponse['http_code']);
