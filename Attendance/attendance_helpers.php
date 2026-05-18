@@ -716,6 +716,23 @@ function bp_att_float_or_null($value): ?float
     return is_numeric($value) ? (float)$value : null;
 }
 
+function bp_att_is_valid_coordinate(?float $latitude, ?float $longitude): bool
+{
+    if ($latitude === null || $longitude === null) {
+        return false;
+    }
+
+    if (!is_finite($latitude) || !is_finite($longitude)) {
+        return false;
+    }
+
+    if ($latitude < -90 || $latitude > 90 || $longitude < -180 || $longitude > 180) {
+        return false;
+    }
+
+    return abs($latitude) > 0.000001 && abs($longitude) > 0.000001;
+}
+
 function bp_att_fetch_project_locations(array $projectIds): array
 {
     $projectIds = bp_att_unique_values($projectIds);
@@ -758,7 +775,7 @@ function bp_att_fetch_project_locations(array $projectIds): array
 
         $latitude = bp_att_float_or_null($row['latitude'] ?? null);
         $longitude = bp_att_float_or_null($row['longitude'] ?? null);
-        if ($latitude === null || $longitude === null) {
+        if (!bp_att_is_valid_coordinate($latitude, $longitude)) {
             continue;
         }
 

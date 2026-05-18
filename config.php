@@ -31,7 +31,7 @@ $bpLegacyRootResolved = bp_first_existing_dir([
     $bpHomeRoot . DIRECTORY_SEPARATOR . 'Downloads' . DIRECTORY_SEPARATOR . $bpLegacyRootName,
     $bpHomeRoot . DIRECTORY_SEPARATOR . 'Documents' . DIRECTORY_SEPARATOR . $bpLegacyRootName,
 ], $bpLocalLegacyRootDefault);
-$bpQrApiBaseUrlDefault = 'http://zigfly.in:5001';
+$bpQrApiBaseUrlDefault = 'http://125.17.238.158:5001';
 
 define('BP_APP_ENV', $bpEnv);
 define('BP_BLUE_PLANET_ROOT_NAME', $bpLegacyRootName);
