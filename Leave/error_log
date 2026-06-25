@@ -2952,3 +2952,259 @@ Stack trace:
 #3 /home/ie9owkuzkgd4/public_html/bp_mobile_app/Leave/leave_helpers.php(410): bp_fetch_shift_weekoff_map(Array, '2025-04-10', '2028-04-09')
 #4 /home/ie9owkuzkgd4/public_html/bp_mobile_app/Leave/leave_dashboard.php(57): bp_fetch_weekoff_dates_for_staff(Array, '2025-04-10', '2028-04-09')
 #5 {main}
+[19-May-2026 12:55:17 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_dashboard.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[20-May-2026 14:27:38 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_dashboard.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 12:58:34 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_device_token_upsert.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 12:58:34 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_dashboard.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 12:58:37 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_dashboard.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 12:59:50 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_device_token_upsert.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 13:08:41 Asia/Kolkata] bp_mobile_app leave_status_mail sent=1 to=creative@zigma.in,tharaneeshsami@gmail.com,gopi.zges.2000@gmail.com,neha.bhatnagar@blue-planet.com
+[01-Jun-2026 13:09:34 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_6ec5c0df0f9fb29650f905bef15b7d30, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:09:34 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:09:40 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_df1694ee15027abd96ff76d0cb3af141, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:09:40 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:09:41 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_e0e18f45b6243b24b52428e0be05bd9a, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:09:41 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:09:56 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_1b383133e3dc37d7c1575c51d940822e, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:09:56 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:10 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_bd910b47944b216f302c5beb11fdaf99, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:10 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:10 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_dashboard.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 13:10:22 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_3b95d58dbc34b02832504bbb0a4878ff, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:22 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:28 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_13869505562843d8ba90ed0e37138c75, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:28 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:34 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_d0d3c7b74b63385df9ffc7a8f932be9f, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:34 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:42 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_5e725567fbc9541b01186e152ccb1f38, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:42 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:49 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_2617f0f71a395b34c22826db40219333, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:49 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:10:49 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_device_token_upsert.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 13:11:00 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_713687cd77e2b7e6c61fd7d8a255d55a, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:00 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:00 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_0a6d5e363fc9d6bcc2adf2bb919760b0, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:00 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:01 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_da7730a90f6d59fc580aadfc237182f1, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:01 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:01 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_b7e1093c4e0b4dda62d0d5787276f8fd, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:01 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:02 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_4c02dc3943d119149b4db9a64436dc9c, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:02 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:03 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_17793c66c880560de4de009cc0da02f9, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:03 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:06 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_3fbdead66d806f7a7a5b9ee11145dcc3, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:06 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:22 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_83003506bb8967e51754f272cb8e9882, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:22 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:24 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_994410eb92da2526a12e1b7ef6cbe115, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:24 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:24 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_ace1b7efbf952f6b3dcdb5e586b3d2a1, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:24 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:39 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_ad537878138a72e83b598b67625b4573, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:39 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:39 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_b4d75556ab535c31fc6c76d4e525e13c, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:39 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:40 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_7f247a295e237aab354a3a60b2557299, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:40 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:40 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_e53cae7f49051fe004dbbb56ac1bfbc3, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:40 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:43 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_b25009df289a2cce86ddcae38daea1f2, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:11:43 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:11 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_a731dea3b86bc81281a111538178e944, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:11 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:37 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_4c68d6c534e33f4d0d66ad0bdf7c631e, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:37 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:37 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_f97a4526a977350cf58fadbe198e7a85, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:37 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:40 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_2bd72f2afc2af758a8b18683a0e70cfb, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:40 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:59 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_14d272c0c8229aa84129a174453d3b6b, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:12:59 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:13:09 Asia/Kolkata] bp_mobile_app leave_status_mail sent=1 to=tharaneeshsami@gmail.com,creative@zigma.in,gopi.zges.2000@gmail.com,neha.bhatnagar@blue-planet.com
+[01-Jun-2026 13:13:10 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_f2fd14a34107e62d015918757582fb51, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:13:10 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:13:42 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_2ea64af3b3f09c3f4327ade89570a8b4, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:13:42 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:13:47 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_27c2f9d91b1d5f30b5cdb9f9386555a8, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:13:47 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:13:49 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_abbf5076de200de02311ea86e61f664f, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:13:49 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:06 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_c6d38ecc7fe63b8e1c97752fa8276e03, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:06 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:12 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_2ce1a91f9d95f2fe89ff65c319740af2, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:12 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:18 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_4d1839db3d3f6d8444f8b1d81b0143d0, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:18 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:36 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_30def9995e52bc1e603728627b3083c8, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:36 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:40 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_bff26efe4861f20b131eecb1baffbd53, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:40 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:41 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_a70c7caa4cffe0b9b385d871b26b1820, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:41 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:42 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_638b6521078223d379d702bb99d4ee69, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:42 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:42 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_dashboard.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 13:14:46 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_9ed6559f96a05a0a5ff75f6717cb6455, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:46 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:46 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_dashboard.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 13:14:49 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_1cbd056cb8f39fdd179e104b0ea2efc6, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:49 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:49 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_notifications.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 13:14:50 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_58ede1407b63de727706ab3e23b6f2f6, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:50 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:52 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_511c5372787be7a10e61331fd9f3c269, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:52 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:14:52 Asia/Kolkata] PDOException: SQLSTATE[HY000] [1203] User zigma already has more than 'max_user_connections' active connections in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php:48
+Stack trace:
+#0 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbclass.php(48): PDO->__construct('mysql:host=loca...', 'zigma', '?WSzvxHv1LGZ', Array)
+#1 /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php(29): db->__construct('mysql', 'localhost', 'zigma', '?WSzvxHv1LGZ', 'blue_planet_bet...')
+#2 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/bootstrap.php(65): require_once('/home/ie9owkuzk...')
+#3 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_helpers.php(4): require_once('/home/ie9owkuzk...')
+#4 /home/ie9owkuzkgd4/public_html/bp_mobile_app_beta/Leave/leave_dashboard.php(4): require_once('/home/ie9owkuzk...')
+#5 {main}
+[01-Jun-2026 13:15:04 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_a899cd4921a2b81a4d7b1940f40a581d, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:04 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:12 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_29ad86671992123b960d5f7493952dc6, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:12 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:23 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_629487aa1e6ff668b4c8bf6c7c59fd14, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:23 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:32 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_b6f80d537d8894b76d1e098772b3de22, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:32 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:40 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_dd54334a8325ca7935b8cb732e87aefc, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:40 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:51 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_18d50d5adf755c6db00b7e84d1ad47bf, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:15:51 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:13 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_368c340825cc11c4d0cdd6f9909ce2a7, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:13 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:38 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_0540fe1fd0971849b5c4ff324674e34f, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:38 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:41 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_3d37d543f461f9ea293c73101d8e5272, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:41 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:42 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_75be93f85ef67d89ff6500053c75a516, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:42 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:59 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_b5543e94ef37f02ad440af10944dfe43, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:16:59 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:00 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_c56869de4da6f1c9f4ea43f3a6153f31, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:00 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:00 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_0e2b109932f88c457eabbd11e321c70c, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:00 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:01 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_8a90638811f86698de9cb4e67036d5cd, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:01 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:35 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_751e37154e2b0ae5a676751fc088a584, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:35 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:35 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_2e9bf11342487e0afcbb7f470e7b2075, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:35 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:41 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_ec3bcd0af5e607b9d63d4975f9e8771e, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:41 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:41 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_01d953f81f0f11622da9324d3360d250, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:41 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:42 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_f8ce0a60a9f79e8e06ff7dd42c9a5641, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:42 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:45 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_902e0bac1f0579e158fd07519478a92f, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:45 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:45 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_5781ad798fa21bc153393a321897d251, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:45 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:47 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_a37073d256cfe703ae14506c1393e4e9, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:47 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:50 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_51e873dab440b5baab37da492152d355, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:17:50 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:01 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_a942840f6a1f2f8facd0f4b02b6c0fe5, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:01 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:18 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_38e5f4ed129665fae482b5a73cbfb066, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:18 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:18 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_f97bc5acf11f7b737f3295674f59acb5, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:18 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:56 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_5df606132bb723f6bab9bb4b115b8ee2, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:56 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:57 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_2e039318fa97edc80226e80eb2aa5c0c, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:57 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:57 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_dbf361db0fe1f9a82ee0f620651a05e0, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:57 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:58 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_ea3a58255029c68110502afd1c7f32bf, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:18:58 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:19:06 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_64f9a1072e3516191427775a1600f030, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:19:06 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:19:07 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_931a817c099ade51129075e0ddd13774, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:19:07 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:19:08 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_962bbd4c13f4f188b76f3f2780e0a69b, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:19:08 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:19:22 Asia/Kolkata] PHP Warning:  session_start(): open(/opt/alt/php74/var/lib/php/session/sess_8b4ac490efb358de78c8171a20b7164a, O_RDWR) failed: Disk quota exceeded (122) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2
+[01-Jun-2026 13:19:22 Asia/Kolkata] PHP Warning:  session_start(): Failed to read session data: files (path: /opt/alt/php74/var/lib/php/session) in /home/ie9owkuzkgd4/public_html/blue_planet_beta/config/dbconfig.php on line 2

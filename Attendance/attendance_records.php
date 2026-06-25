@@ -36,6 +36,16 @@ $items = array_map(static function (array $item): array {
     $item['check_in_image_url_candidates'] = $inImageCandidates;
     $item['check_out_image_url'] = bp_att_first_url_candidate($outImageCandidates);
     $item['check_out_image_url_candidates'] = $outImageCandidates;
+
+    // Alias fields expected by the mobile app's AttendanceRecord model.
+    // The view returns in_*/out_* keys; the app reads check_in_*/check_out_*.
+    $item['check_in_latitude'] = (string)($item['in_latitude'] ?? '');
+    $item['check_in_longitude'] = (string)($item['in_longitude'] ?? '');
+    $item['check_out_latitude'] = (string)($item['out_latitude'] ?? '');
+    $item['check_out_longitude'] = (string)($item['out_longitude'] ?? '');
+    $item['check_in_image'] = (string)($item['in_image_path'] ?? '');
+    $item['check_out_image'] = (string)($item['out_image_path'] ?? '');
+
     return $item;
 }, $items);
 
@@ -74,7 +84,7 @@ $legacyRecords = array_map(static function (array $item): array {
 bp_send_json([
     'status' => true,
     'message' => 'Attendance records loaded',
-    'source' => 'bp_mobile_app.vw_attendance_with_shift',
+    'source' => 'bp_mobile_app.attendance_records',
     'records' => $legacyRecords,
     'data' => [
         'employee' => [
@@ -85,6 +95,13 @@ bp_send_json([
         ],
         'from_date' => $fromDate,
         'to_date' => $toDate,
+        'source_tables' => array_values(array_filter([
+            'vw_attendance_with_shift',
+            'att_approval',
+            defined('BP_APP_ENV') && BP_APP_ENV === 'beta'
+                ? 'blueplanet.recognized_beta'
+                : 'blueplanet.recognized',
+        ])),
         'items' => $items,
         'server_time' => bp_now(),
     ],

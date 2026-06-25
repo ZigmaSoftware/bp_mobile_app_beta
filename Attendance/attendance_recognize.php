@@ -25,6 +25,12 @@ function bp_att_recognize_json(array $payload, int $statusCode = 200)
 
 function bp_att_recognize_target_urls(): array
 {
+<<<<<<< HEAD
+=======
+    $endpoint = defined('BP_APP_ENV') && BP_APP_ENV === 'beta'
+        ? 'recognize_bp_beta'
+        : 'recognize_bp';
+>>>>>>> 35822da (bp app updated mobile backend beta)
     $urls = [];
     foreach ([
         defined('BP_FACE_RECOGNITION_BASE_URL') ? BP_FACE_RECOGNITION_BASE_URL : '',
@@ -33,7 +39,11 @@ function bp_att_recognize_target_urls(): array
     ] as $baseUrl) {
         $baseUrl = rtrim(trim((string)$baseUrl), '/');
         if ($baseUrl !== '') {
+<<<<<<< HEAD
             $urls[$baseUrl . '/recognize_bp'] = true;
+=======
+            $urls[$baseUrl . '/' . $endpoint] = true;
+>>>>>>> 35822da (bp app updated mobile backend beta)
         }
     }
 

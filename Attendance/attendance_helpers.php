@@ -331,6 +331,9 @@ function bp_att_status_label(int $status): string
     if ($status === 2) {
         return 'Rejected';
     }
+    if ($status === 3) {
+        return 'Deleted';
+    }
     return 'Pending';
 }
 
@@ -704,6 +707,15 @@ function bp_att_project_ids_from_context(array $context): array
         }
     }
 
+    if (empty($projectIds)) {
+        foreach (bp_att_project_ids_from_recognized_history((string)($context['employee_id'] ?? '')) as $value) {
+            $value = trim((string)$value);
+            if ($value !== '' && strcasecmp($value, 'all') !== 0) {
+                $projectIds[] = $value;
+            }
+        }
+    }
+
     return bp_att_unique_values($projectIds);
 }
 
@@ -804,6 +816,183 @@ function bp_att_fetch_project_locations(array $projectIds): array
 function bp_att_project_locations_for_context(array $context): array
 {
     return bp_att_fetch_project_locations(bp_att_project_ids_from_context($context));
+}
+
+function bp_att_head_office_project_id(): string
+{
+    return '69858f736caee70745';
+}
+
+function bp_att_project_location_is_head_office(array $project): bool
+{
+    $projectId = trim((string)($project['project_id'] ?? $project['unique_id'] ?? ''));
+    $projectName = strtoupper(trim((string)($project['project_name'] ?? '')));
+
+    return $projectId === bp_att_head_office_project_id()
+        || $projectName === 'BP HEAD OFFICE';
+}
+
+function bp_att_context_has_head_office_access(array $context, ?array $projectLocations = null): bool
+{
+    foreach (bp_att_project_ids_from_context($context) as $projectId) {
+        if (trim((string)$projectId) === bp_att_head_office_project_id()) {
+            return true;
+        }
+    }
+
+    foreach ((array)($projectLocations ?? bp_att_project_locations_for_context($context)) as $project) {
+        if (is_array($project) && bp_att_project_location_is_head_office($project)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function bp_att_distance_meters(float $fromLatitude, float $fromLongitude, float $toLatitude, float $toLongitude): float
+{
+    $earthRadiusMeters = 6371000;
+    $lat1 = deg2rad($fromLatitude);
+    $lat2 = deg2rad($toLatitude);
+    $deltaLat = deg2rad($toLatitude - $fromLatitude);
+    $deltaLon = deg2rad($toLongitude - $fromLongitude);
+
+    $a = sin($deltaLat / 2) * sin($deltaLat / 2)
+        + cos($lat1) * cos($lat2) * sin($deltaLon / 2) * sin($deltaLon / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+    return $earthRadiusMeters * $c;
+}
+
+function bp_att_nearest_project_location(array $projectLocations, float $latitude, float $longitude): ?array
+{
+    $nearest = null;
+    $nearestDistance = null;
+
+    foreach ($projectLocations as $project) {
+        if (!is_array($project)) {
+            continue;
+        }
+
+        $projectLatitude = bp_att_float_or_null($project['latitude'] ?? null);
+        $projectLongitude = bp_att_float_or_null($project['longitude'] ?? null);
+        if (!bp_att_is_valid_coordinate($projectLatitude, $projectLongitude)) {
+            continue;
+        }
+
+        $distance = bp_att_distance_meters($latitude, $longitude, (float)$projectLatitude, (float)$projectLongitude);
+        if ($nearestDistance === null || $distance < $nearestDistance) {
+            $nearest = $project;
+            $nearestDistance = $distance;
+        }
+    }
+
+    if ($nearest === null || $nearestDistance === null) {
+        return null;
+    }
+
+    $nearest['distance_meters'] = $nearestDistance;
+    return $nearest;
+}
+
+function bp_att_direct_punch_timestamp(array $input): array
+{
+    $now = new DateTimeImmutable('now', new DateTimeZone('Asia/Kolkata'));
+    $recognitionDate = bp_date_ymd(bp_str($input, 'recognition_date')) ?? $now->format('Y-m-d');
+    $recognitionTime = trim(bp_str($input, 'recognition_time', $now->format('H:i:s')));
+    $records = trim(bp_str($input, 'records', $recognitionDate . ' ' . $recognitionTime));
+
+    return [$recognitionDate, $recognitionTime, $records];
+}
+
+function bp_att_insert_direct_recognized(array $context, array $input, float $latitude, float $longitude): array
+{
+    [$recognitionDate, $recognitionTime, $records] = bp_att_direct_punch_timestamp($input);
+    $employeeId = trim((string)($context['employee_id'] ?? ''));
+    $employeeName = trim((string)($context['staff']['staff_name'] ?? ''));
+
+    $insert = bp_att_insert_row_raw('zigfly_recognized', [
+        'emp_id' => $employeeId,
+        'name' => $employeeName,
+        'records' => $records,
+        'captured_image_path' => 'direct_punch',
+        'similarity_score' => '0',
+        'latitude' => (string)$latitude,
+        'longitude' => (string)$longitude,
+        'recognition_date' => $recognitionDate,
+        'recognition_time' => $recognitionTime,
+    ]);
+
+    if (!$insert || !($insert->status ?? false)) {
+        return [
+            'status' => false,
+            'message' => 'Failed to mark direct attendance',
+            'error' => bp_att_error_text($insert->error ?? ''),
+        ];
+    }
+
+    return [
+        'status' => true,
+        'recognition_date' => $recognitionDate,
+        'recognition_time' => $recognitionTime,
+        'records' => $records,
+    ];
+}
+
+function bp_att_insert_direct_approval(array $context, array $input, float $latitude, float $longitude): array
+{
+    [$recognitionDate, $recognitionTime, $records] = bp_att_direct_punch_timestamp($input);
+    $employeeId = trim((string)($context['employee_id'] ?? ''));
+    $employeeName = trim((string)($context['staff']['staff_name'] ?? ''));
+    $now = bp_now();
+
+    $insert = bp_att_insert_row_raw('att_approval', [
+        'emp_id' => $employeeId,
+        'name' => $employeeName,
+        'records' => $records,
+        'captured_image_path' => 'direct_punch',
+        'similarity_score' => '0',
+        'latitude' => (string)$latitude,
+        'longitude' => (string)$longitude,
+        'recognition_date' => $recognitionDate,
+        'recognition_time' => $recognitionTime,
+        'status' => 0,
+        'created' => $now,
+        'updated' => $now,
+        'is_active' => 1,
+        'is_delete' => 0,
+    ]);
+
+    if (!$insert || !($insert->status ?? false)) {
+        return [
+            'status' => false,
+            'message' => 'Failed to send direct attendance for approval',
+            'error' => bp_att_error_text($insert->error ?? ''),
+        ];
+    }
+
+    $approvalRow = bp_att_find_pending_approval_for_employee(
+        $employeeId,
+        null,
+        $records,
+        $recognitionDate
+    );
+
+    if (!$approvalRow) {
+        return [
+            'status' => false,
+            'message' => 'Direct attendance approval was created but could not be reloaded',
+            'error' => '',
+        ];
+    }
+
+    return [
+        'status' => true,
+        'approval' => $approvalRow,
+        'recognition_date' => $recognitionDate,
+        'recognition_time' => $recognitionTime,
+        'records' => $records,
+    ];
 }
 
 function bp_att_sql_date_filter(string $column, ?string $fromDate, ?string $toDate): string
@@ -1016,7 +1205,7 @@ function bp_att_fetch_employee_history(string $employeeId, ?string $fromDate = n
     }
 
     $limit = max(1, min($limit, 365));
-    $where = "a.is_delete = 0 AND a.emp_id = " . bp_sql_quote($employeeId);
+    $where = "a.is_delete = 0 AND a.status <> 3 AND a.emp_id = " . bp_sql_quote($employeeId);
     if ($status !== null) {
         $where .= " AND a.status = " . intval($status);
     }
@@ -1329,6 +1518,11 @@ function bp_att_centralized_media_url_candidates(string $path, string $directory
         return [$path];
     }
 
+    $cleanDirectory = trim($directory, '/');
+    $directories = $cleanDirectory === 'uploads'
+        ? ['uploads_bp', 'uploads']
+        : [$cleanDirectory];
+
     $urls = [];
 
     foreach (bp_att_centralized_qr_api_base_urls() as $baseUrl) {
@@ -1337,7 +1531,12 @@ function bp_att_centralized_media_url_candidates(string $path, string $directory
         $trimmedUploads = ltrim(preg_replace('#^/?uploads/#i', '', $relative) ?? $relative, '/');
 
         if ($fileName !== '' && $fileName !== '.' && $fileName !== '..') {
-            $urls[] = $baseUrl . '/' . trim($directory, '/') . '/' . rawurlencode($fileName);
+            foreach ($directories as $candidateDirectory) {
+                $candidateDirectory = trim((string)$candidateDirectory, '/');
+                if ($candidateDirectory !== '') {
+                    $urls[] = $baseUrl . '/' . $candidateDirectory . '/' . rawurlencode($fileName);
+                }
+            }
         }
         if ($relative !== '') {
             $urls[] = $baseUrl . '/' . $relative;
@@ -1433,6 +1632,75 @@ function bp_att_blueplanet_table_columns(string $table): array
 
     $cache[$table] = $columns;
     return $cache[$table];
+}
+
+function bp_att_recognized_table_name(): string
+{
+    return defined('BP_APP_ENV') && BP_APP_ENV === 'beta'
+        ? 'recognized_beta'
+        : 'recognized';
+}
+
+function bp_att_project_ids_from_recognized_history(string $employeeId): array
+{
+    $employeeId = trim($employeeId);
+    if ($employeeId === '') {
+        return [];
+    }
+
+    $table = bp_att_recognized_table_name();
+    $columns = bp_att_blueplanet_table_columns($table);
+    if (empty($columns) || !isset($columns['emp_id']) || !isset($columns['work_location'])) {
+        return [];
+    }
+
+    $pdo = bp_att_blueplanet_pdo();
+    if (!$pdo instanceof PDO) {
+        return [];
+    }
+
+    $placeholders = [];
+    $params = [];
+    foreach (bp_att_employee_id_candidates($employeeId) as $index => $candidate) {
+        $placeholder = ':emp_id_' . $index;
+        $placeholders[] = $placeholder;
+        $params[$placeholder] = strtoupper(trim($candidate));
+    }
+
+    if (empty($placeholders)) {
+        return [];
+    }
+
+    $sql = 'SELECT work_location'
+        . ' FROM `' . $table . '`'
+        . ' WHERE UPPER(TRIM(emp_id)) IN (' . implode(', ', $placeholders) . ')'
+        . " AND TRIM(COALESCE(work_location, '')) <> ''"
+        . ' ORDER BY records DESC, id DESC'
+        . ' LIMIT 20';
+
+    try {
+        $statement = $pdo->prepare($sql);
+        foreach ($params as $placeholder => $value) {
+            $statement->bindValue($placeholder, $value);
+        }
+        $statement->execute();
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Throwable $e) {
+        error_log('bp_mobile_app recognized work location lookup failed: ' . bp_att_error_text($e));
+        return [];
+    }
+
+    $projectIds = [];
+    foreach ($rows as $row) {
+        foreach (bp_parse_csv_values((string)($row['work_location'] ?? '')) as $value) {
+            $value = trim((string)$value);
+            if ($value !== '') {
+                $projectIds[$value] = true;
+            }
+        }
+    }
+
+    return array_keys($projectIds);
 }
 
 function bp_att_employee_media_tables(): array
@@ -1719,7 +1987,7 @@ function bp_att_fetch_centralized_employee_media_row(string $employeeId, ?string
     $headers = ['Accept: application/json'];
     $lastFailure = '';
     $endpointPaths = defined('BP_APP_ENV') && BP_APP_ENV === 'beta'
-        ? ['employees_beta', 'employees_beta_1', 'employees']
+        ? ['employees_beta_1', 'employees_beta', 'employees']
         : ['employees'];
 
     foreach (bp_att_centralized_qr_api_base_urls() as $baseUrl) {
@@ -2018,12 +2286,16 @@ function bp_att_fetch_actual_attendance_records(
     $approvalByDate = $employeeId !== ''
         ? bp_att_index_employee_approvals_by_date($employeeId, $fromDate, $toDate)
         : [];
+    $recognizedByDate = $employeeId !== ''
+        ? bp_att_fetch_recognized_records_by_date($employeeId, $fromDate, $toDate)
+        : [];
 
     $items = [];
     foreach ($rowsByDate as $shiftDate => $row) {
         $raw = is_array($row['_raw'] ?? null) ? $row['_raw'] : [];
         $statusRaw = trim((string)($row['attendance_status'] ?? ''));
         $approval = is_array($approvalByDate[$shiftDate] ?? null) ? $approvalByDate[$shiftDate] : null;
+        $recognized = is_array($recognizedByDate[$shiftDate] ?? null) ? $recognizedByDate[$shiftDate] : null;
 
         $items[$shiftDate] = [
             'date' => $shiftDate,
@@ -2054,6 +2326,13 @@ function bp_att_fetch_actual_attendance_records(
             'approval_time' => trim((string)($approval['recognition_time'] ?? '')),
             'approval_records' => trim((string)($approval['records'] ?? '')),
         ];
+
+        if ($recognized) {
+            $items[$shiftDate] = bp_att_merge_recognized_attendance_item(
+                $items[$shiftDate],
+                $recognized
+            );
+        }
     }
 
     foreach ($approvalByDate as $shiftDate => $approval) {
@@ -2093,8 +2372,302 @@ function bp_att_fetch_actual_attendance_records(
         ];
     }
 
+    foreach ($recognizedByDate as $shiftDate => $recognized) {
+        if (isset($items[$shiftDate])) {
+            continue;
+        }
+
+        $items[$shiftDate] = bp_att_recognized_row_to_attendance_item(
+            $shiftDate,
+            $employeeId,
+            $recognized
+        );
+    }
+
     ksort($items);
     return array_values($items);
+}
+
+function bp_att_fetch_recognized_records_by_date(
+    string $employeeId,
+    ?string $fromDate = null,
+    ?string $toDate = null
+): array {
+    $employeeId = trim($employeeId);
+    if ($employeeId === '') {
+        return [];
+    }
+
+    $table = bp_att_recognized_table_name();
+    $columns = bp_att_blueplanet_table_columns($table);
+    $requiredColumns = ['emp_id', 'records', 'recognition_date'];
+    foreach ($requiredColumns as $column) {
+        if (!isset($columns[$column])) {
+            return [];
+        }
+    }
+
+    $pdo = bp_att_blueplanet_pdo();
+    if (!$pdo instanceof PDO) {
+        return [];
+    }
+
+    if ($fromDate === null || bp_date_ymd($fromDate) === null) {
+        $fromDate = date('Y-m-01');
+    }
+    if ($toDate === null || bp_date_ymd($toDate) === null) {
+        $toDate = date('Y-m-t');
+    }
+    if ($fromDate > $toDate) {
+        $tmp = $fromDate;
+        $fromDate = $toDate;
+        $toDate = $tmp;
+    }
+
+    $selectColumns = array_values(array_filter([
+        'id',
+        'emp_id',
+        'name',
+        'records',
+        'captured_image_path',
+        'similarity_score',
+        'latitude',
+        'longitude',
+        'recognition_date',
+        'recognition_time',
+        'work_location',
+    ], static function (string $column) use ($columns): bool {
+        return isset($columns[$column]);
+    }));
+
+    $placeholders = [];
+    $params = [
+        ':from_date' => $fromDate,
+        ':to_date' => $toDate,
+    ];
+    foreach (bp_att_employee_id_candidates($employeeId) as $index => $candidate) {
+        $placeholder = ':emp_id_' . $index;
+        $placeholders[] = $placeholder;
+        $params[$placeholder] = strtoupper(trim($candidate));
+    }
+
+    if (empty($placeholders)) {
+        return [];
+    }
+
+    $sql = 'SELECT ' . implode(', ', $selectColumns)
+        . ' FROM `' . $table . '`'
+        . ' WHERE UPPER(TRIM(emp_id)) IN (' . implode(', ', $placeholders) . ')'
+        . ' AND recognition_date >= :from_date'
+        . ' AND recognition_date <= :to_date'
+        . ' ORDER BY recognition_date ASC, records ASC, id ASC';
+
+    try {
+        $statement = $pdo->prepare($sql);
+        foreach ($params as $placeholder => $value) {
+            $statement->bindValue($placeholder, $value);
+        }
+        $statement->execute();
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Throwable $e) {
+        error_log('bp_mobile_app recognized attendance lookup failed: ' . bp_att_error_text($e));
+        return [];
+    }
+
+    $items = [];
+    foreach ($rows as $row) {
+        $shiftDate = bp_date_ymd((string)($row['recognition_date'] ?? ''));
+        if ($shiftDate === null) {
+            $shiftDate = bp_date_ymd((string)($row['records'] ?? ''));
+        }
+        if ($shiftDate === null) {
+            continue;
+        }
+
+        $records = trim((string)($row['records'] ?? ''));
+        $timeOnly = bp_att_attendance_time_only($records);
+        if (!isset($items[$shiftDate])) {
+            $items[$shiftDate] = [
+                'count' => 0,
+                'employee_name' => trim((string)($row['name'] ?? '')),
+                'entry_punch' => $records,
+                'exit_punch' => '',
+                'in_time' => $timeOnly,
+                'out_time' => '',
+                'in_latitude' => trim((string)($row['latitude'] ?? '')),
+                'in_longitude' => trim((string)($row['longitude'] ?? '')),
+                'in_image_path' => trim((string)($row['captured_image_path'] ?? '')),
+                'out_latitude' => '',
+                'out_longitude' => '',
+                'out_image_path' => '',
+                'work_location' => trim((string)($row['work_location'] ?? '')),
+                'first_records' => $records,
+                'last_records' => $records,
+                'recognition_time' => trim((string)($row['recognition_time'] ?? '')),
+            ];
+        }
+
+        $items[$shiftDate]['count']++;
+        $items[$shiftDate]['employee_name'] = $items[$shiftDate]['employee_name'] !== ''
+            ? $items[$shiftDate]['employee_name']
+            : trim((string)($row['name'] ?? ''));
+
+        $items[$shiftDate]['last_records'] = $records;
+        $items[$shiftDate]['recognition_time'] = trim((string)($row['recognition_time'] ?? ''));
+
+        if ($items[$shiftDate]['count'] > 1) {
+            $items[$shiftDate]['exit_punch'] = $records;
+            $items[$shiftDate]['out_time'] = $timeOnly;
+            $items[$shiftDate]['out_latitude'] = trim((string)($row['latitude'] ?? ''));
+            $items[$shiftDate]['out_longitude'] = trim((string)($row['longitude'] ?? ''));
+            $items[$shiftDate]['out_image_path'] = trim((string)($row['captured_image_path'] ?? ''));
+        }
+    }
+
+    foreach ($items as $shiftDate => $item) {
+        $workedTime = '';
+        if ((int)($item['count'] ?? 0) > 1) {
+            $workedTime = bp_att_worked_time_between(
+                (string)($item['first_records'] ?? ''),
+                (string)($item['last_records'] ?? '')
+            );
+        }
+
+        $items[$shiftDate] = [
+            'date' => $shiftDate,
+            'legacy_date' => bp_att_attendance_legacy_date($shiftDate),
+            'staff_name' => (string)($item['employee_name'] ?? ''),
+            'attendance_status' => 'Present',
+            'status_bucket' => bp_attendance_summary_bucket('Present'),
+            'day_status' => bp_att_attendance_day_status('Present'),
+            'entry_punch' => (string)($item['entry_punch'] ?? ''),
+            'exit_punch' => (string)($item['exit_punch'] ?? ''),
+            'in_time' => (string)($item['in_time'] ?? ''),
+            'out_time' => (string)($item['out_time'] ?? ''),
+            'total_worked_time' => $workedTime,
+            'in_latitude' => (string)($item['in_latitude'] ?? ''),
+            'in_longitude' => (string)($item['in_longitude'] ?? ''),
+            'in_image_path' => (string)($item['in_image_path'] ?? ''),
+            'out_latitude' => (string)($item['out_latitude'] ?? ''),
+            'out_longitude' => (string)($item['out_longitude'] ?? ''),
+            'out_image_path' => (string)($item['out_image_path'] ?? ''),
+            'in_site_name' => '',
+            'out_site_name' => '',
+        ];
+    }
+
+    return $items;
+}
+
+function bp_att_worked_time_between(string $start, string $end): string
+{
+    $start = trim($start);
+    $end = trim($end);
+    if ($start === '' || $end === '') {
+        return '';
+    }
+
+    $startTs = strtotime($start);
+    $endTs = strtotime($end);
+    if ($startTs === false || $endTs === false || $endTs <= $startTs) {
+        return '';
+    }
+
+    $seconds = $endTs - $startTs;
+    $hours = (int)floor($seconds / 3600);
+    $minutes = (int)floor(($seconds % 3600) / 60);
+    $remainingSeconds = (int)($seconds % 60);
+
+    return sprintf('%02d:%02d:%02d', $hours, $minutes, $remainingSeconds);
+}
+
+function bp_att_merge_recognized_attendance_item(array $item, array $recognized): array
+{
+    $hasRecognizedPunch = trim((string)($recognized['in_time'] ?? '')) !== ''
+        || trim((string)($recognized['out_time'] ?? '')) !== ''
+        || trim((string)($recognized['entry_punch'] ?? '')) !== ''
+        || trim((string)($recognized['exit_punch'] ?? '')) !== '';
+
+    foreach ([
+        'entry_punch',
+        'exit_punch',
+        'in_time',
+        'out_time',
+        'total_worked_time',
+        'in_latitude',
+        'in_longitude',
+        'in_image_path',
+        'out_latitude',
+        'out_longitude',
+        'out_image_path',
+        'in_site_name',
+        'out_site_name',
+    ] as $field) {
+        $current = trim((string)($item[$field] ?? ''));
+        if ($current === '') {
+            $item[$field] = (string)($recognized[$field] ?? '');
+        }
+    }
+
+    $status = trim((string)($item['attendance_status'] ?? ''));
+    $shouldUseRecognizedStatus = $status === ''
+        || ($hasRecognizedPunch && bp_attendance_is_absent_status($status));
+    if ($shouldUseRecognizedStatus) {
+        $item['attendance_status'] = (string)($recognized['attendance_status'] ?? 'Present');
+    }
+
+    $statusBucket = trim((string)($item['status_bucket'] ?? ''));
+    if ($statusBucket === '' || $shouldUseRecognizedStatus) {
+        $item['status_bucket'] = (string)($recognized['status_bucket'] ?? bp_attendance_summary_bucket('Present'));
+    }
+
+    $dayStatus = trim((string)($item['day_status'] ?? ''));
+    if ($dayStatus === '' || $shouldUseRecognizedStatus || ($hasRecognizedPunch && bp_attendance_is_absent_status($dayStatus))) {
+        $item['day_status'] = (string)($recognized['day_status'] ?? bp_att_attendance_day_status('Present'));
+    }
+
+    $staffName = trim((string)($item['staff_name'] ?? ''));
+    if ($staffName === '') {
+        $item['staff_name'] = (string)($recognized['staff_name'] ?? '');
+    }
+
+    return $item;
+}
+
+function bp_att_recognized_row_to_attendance_item(
+    string $shiftDate,
+    string $employeeId,
+    array $recognized
+): array {
+    return [
+        'date' => $shiftDate,
+        'legacy_date' => bp_att_attendance_legacy_date($shiftDate),
+        'employee_id' => $employeeId,
+        'staff_name' => (string)($recognized['staff_name'] ?? ''),
+        'planned_shift' => '',
+        'attendance_status' => (string)($recognized['attendance_status'] ?? 'Present'),
+        'status_bucket' => (string)($recognized['status_bucket'] ?? ''),
+        'day_status' => (string)($recognized['day_status'] ?? ''),
+        'entry_punch' => (string)($recognized['entry_punch'] ?? ''),
+        'exit_punch' => (string)($recognized['exit_punch'] ?? ''),
+        'in_time' => (string)($recognized['in_time'] ?? ''),
+        'out_time' => (string)($recognized['out_time'] ?? ''),
+        'total_worked_time' => (string)($recognized['total_worked_time'] ?? ''),
+        'shift_hours' => '',
+        'in_latitude' => (string)($recognized['in_latitude'] ?? ''),
+        'in_longitude' => (string)($recognized['in_longitude'] ?? ''),
+        'in_image_path' => (string)($recognized['in_image_path'] ?? ''),
+        'out_latitude' => (string)($recognized['out_latitude'] ?? ''),
+        'out_longitude' => (string)($recognized['out_longitude'] ?? ''),
+        'out_image_path' => (string)($recognized['out_image_path'] ?? ''),
+        'in_site_name' => (string)($recognized['in_site_name'] ?? ''),
+        'out_site_name' => (string)($recognized['out_site_name'] ?? ''),
+        'approval_id' => '',
+        'approval_status' => '',
+        'approval_status_code' => '',
+        'approval_time' => '',
+        'approval_records' => '',
+    ];
 }
 
 function bp_att_fetch_approval_row(string $approvalId): ?array
